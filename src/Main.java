@@ -12,6 +12,10 @@ public class Main {
         fullInformation();
         maxSalary();
         minSalary();
+        System.out.println(averageSalarySum());
+        fullNameInformation();
+        indexationSalary(5);
+        fullInformation();
     }
 
     public static double calculateSalarySum() {     //сумма затрат на зарплаты в месяц
@@ -25,7 +29,7 @@ public class Main {
     }
 
     public static void fullInformation() {     //список всех сотрудников со всеми имеющимися по ним данными
-        for ( int i = 0; i < employees.length; i++) {
+        for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                 System.out.println(employees[i]);
             }
@@ -34,27 +38,62 @@ public class Main {
 
     public static double maxSalary() {
 
+        double department = 0;               //Максимальная зарплата
         double max = Double.MIN_VALUE;
         for (int i = 0; i < employees.length; i++) {
-            if (employees [i] != null && employees[i].getSalary() > max) {
+            if (employees[i] != null && employees[i].getSalary() > max) {
                 max = employees[i].getSalary();
+                department = employees[i].getDepartment();
             }
         }
-        System.out.println("Максимальная зарплата сотрудника " +max);
+        System.out.println("Максимальная зарплата сотрудника " + max + " отдел № " + (int) department);
         return max;
     }
 
     public static double minSalary() {
+        double department = 0;             //Минимальная зарплата
         double min = Double.MAX_VALUE;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getSalary() < min) {
                 min = employees[i].getSalary();
+                department = employees[i].getDepartment();
             }
         }
-        System.out.println("Минимальная зарплата " + min);
-return min;
+        System.out.println("Минимальная зарплата " + min + " отдел № " + (int) department);
+        return min;
     }
 
+    public static double averageSalarySum() {     //Средняя зарплата в месяц
+        double sum = 0;
+        double amount = 0;
+        double average = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                amount++;
+                sum = sum + employees[i].getSalary();
+            }
+        }
+        average = sum / amount;
+        return average;
+    }
 
+    public static void fullNameInformation() {        //Ф.И.О сотрудников
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                System.out.print(employees[i].getFullName() + ", ");
+            }
+        }
+        System.out.println();
+    }
+
+    public static void indexationSalary(int percent) {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                double currentSalary = employees[i].getSalary();
+                employees[i].setSalary(currentSalary * (percent / 100d + 1));
+            }
+        }
+
+    }
 
 }
