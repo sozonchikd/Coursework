@@ -8,6 +8,7 @@ public class Main {
         employees[2] = new Employee("Зарипов Алмаз Артурович", 3, 82000);
         employees[3] = new Employee("Абрамов Тимур Аркадьевич", 4, 69800);
         employees[4] = new Employee("Давлетшин Юрий Семёнович", 3, 70900);
+        employees[5] = new Employee("Минилбаева Алина Алексеевна", 1, 84700);
         System.out.println(calculateSalarySum());
         fullInformation();
         maxSalary();
@@ -22,7 +23,10 @@ public class Main {
         averageSalarySumDepartment(3);
         //indexationSalaryDepartment(5,3); // Индексация отдела в %
         //fullInformation();
-        fullInformationDepartment(3); // Информация по конкретному отделу
+        searchMin(80000);  // поиск зарплаты меньше вводного значения
+        fullInformationDepartment(1); // Информация по конкретному отделу
+        searchMax(80000);  // поиск зарплаты больше вводного значения
+
     }
 
     public static double calculateSalarySum() {     //сумма затрат на зарплаты в месяц
@@ -115,8 +119,9 @@ public class Main {
             }
         }
         System.out.println("Минимальная зарплата в отделе №" + departmen + " " + minDepartmen + " id сотрудника №" + id);
-        return minDepartmen ;
+        return minDepartmen;
     }
+
     public static double maxSalaryDepartmen(int departmen) {        // Максимальная зарплата в отделе
         int id = 0;
         double maxDepartmen = Double.MIN_VALUE;
@@ -130,7 +135,7 @@ public class Main {
             }
         }
         System.out.println("Максимальная зарплата в отделе №" + departmen + " " + maxDepartmen + " id сотрудника №" + id);
-        return maxDepartmen ;
+        return maxDepartmen;
     }
 
     public static double calculateSalarySumDepartment(int department) {  // Сумма затрат по отделу
@@ -167,6 +172,7 @@ public class Main {
             }
         }
     }
+
     public static void fullInformationDepartment(int department) {  //список всех сотрудников отдела со всеми имеющимися по ним данным
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getDepartment() == department) {
@@ -175,5 +181,20 @@ public class Main {
         }
     }
 
+    public static void searchMin(double numberSalary) {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getSalary() < numberSalary) {
+                System.out.println(employees[i]);
+            }
+        }
+    }
+
+    public static void searchMax(double numberSalary) {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getSalary() >= numberSalary) {
+                System.out.println(employees[i]);
+            }
+        }
+    }
 
 }
